@@ -3,6 +3,7 @@ import { Flex, Box, Image, Text } from "@chakra-ui/react";
 
 export default function DetailInformation({ item }) {
   const [isVisible, setIsVisible] = useState(false);
+
   return (
     <Box
       key={item.id}
@@ -26,13 +27,49 @@ export default function DetailInformation({ item }) {
         color="#f5f5f5"
         padding="12px"
         flexDirection="column"
-        rowGap="16px"
+        rowGap="8px"
       >
-        <Text>Name:{item.name}</Text>
-        <Text>Status:{item.status}</Text>
-        <Text>Gender:{item.gender}</Text>
-        <Text>Origin{item.origin.name}</Text>
-        <Text>Location:{item.location.name}</Text>
+        <Box color="#78959e">
+          Name
+          <br />
+          <Text color="white" fontWeight="bold">
+            {item.name}
+          </Text>
+        </Box>
+        <Box color="#78959e">
+          Status
+          <br />
+          <Flex columnGap="8px" color="white" fontWeight="bold">
+            <Text
+              color={item.status === "Alive" ? "green" : "red"}
+              fontWeight="bold"
+            >
+              &#8226;
+            </Text>
+            {item.status}
+          </Flex>
+        </Box>
+        <Box color="#78959e">
+          Gender
+          <br />
+          <Text color="white" fontWeight="bold">
+            {item.gender}
+          </Text>
+        </Box>
+        <Box color="#78959e">
+          Origin
+          <br />
+          <Text color="white" fontWeight="bold">
+            {item.origin.name}
+          </Text>
+        </Box>
+        <Box color="#78959e">
+          Location
+          <br />
+          <Text color="white" fontWeight="bold">
+            {item.location.name}
+          </Text>
+        </Box>
       </Flex>
     </Box>
   );

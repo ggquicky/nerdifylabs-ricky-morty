@@ -3,13 +3,13 @@ import { useEffect, useState } from "react";
 import { Flex, Center } from "@chakra-ui/react";
 import DetailInformation from "./DetailInformation";
 
-export default function InformationCard() {
+export default function InformationCard({ page }) {
   const [characters, setCharacters] = useState([]);
 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    ky.get("https://rickandmortyapi.com/api/character")
+    ky.get(`https://rickandmortyapi.com/api/character?page=${page}`)
       .json()
       .then((resp) => {
         setCharacters(resp);
@@ -17,7 +17,7 @@ export default function InformationCard() {
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }, [page]);
 
   if (loading) {
     return <Center>Loading app...</Center>;
