@@ -11,19 +11,27 @@ export default function NavBar({ page, setPage }) {
   }
 
   return (
-    <Flex padding="16px" gap="32px" color="white" bg="#202329">
+    <Flex
+      padding="16px"
+      gap="32px"
+      color="white"
+      bg="#202329"
+      justifyContent="space-between"
+    >
       <Box>Ricky & Morty</Box>
-      <Box
-        as="Button"
-        isDisabled={page === 1 ? true : false}
-        onClick={() => PreviousPage()}
-      >
-        Previous Page
-      </Box>
-      <Box as="Button" onClick={() => NextPage()}>
-        Previous Page
-      </Box>
-      <Box>Search</Box>
+      <Flex gap="16px">
+        <Box
+          as="Button"
+          isDisabled={page === 1 ? true : false}
+          onClick={() => PreviousPage()}
+        >
+          Previous Page
+        </Box>
+        <Box as="Button" onClick={() => NextPage()}>
+          Previous Page
+        </Box>
+        <Box>Search</Box>
+      </Flex>
     </Flex>
   );
 }
