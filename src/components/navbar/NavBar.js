@@ -30,7 +30,7 @@ export default function NavBar({ page, setPage }) {
         <Box as="Button" onClick={() => NextPage()}>
           Next Page
         </Box>
-        <Box>Search</Box>
+        {/* <Box>Search</Box> */}
       </Flex>
     </Flex>
   );
