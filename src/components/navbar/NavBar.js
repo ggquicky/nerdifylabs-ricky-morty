@@ -28,7 +28,7 @@ export default function NavBar({ page, setPage }) {
           Previous Page
         </Box>
         <Box as="Button" onClick={() => NextPage()}>
-          Previous Page
+          Next Page
         </Box>
         <Box>Search</Box>
       </Flex>
