@@ -17,7 +17,7 @@ export default function InformationCard() {
       .finally(() => {
         setLoading(false);
       });
-  }, [page]);
+  }, [page]); //eslint-disable-line react-hooks/exhaustive-deps
 
   if (loading) {
     return <Center>Loading app...</Center>;
