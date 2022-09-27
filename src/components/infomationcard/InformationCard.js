@@ -24,7 +24,7 @@ export default function InformationCard() {
   }
 
   return (
-    <Flex padding="16px" gap="8px" flexWrap="wrap">
+    <Flex padding="16px" gap="8px" justifyContent="center" flexWrap="wrap">
       {characters.results.map((item) => (
         <DetailInformation key={item.id} item={item} />
       ))}
