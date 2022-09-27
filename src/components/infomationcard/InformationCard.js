@@ -1,12 +1,12 @@
 import ky from "ky";
-import { useEffect, useState } from "react";
+import { useEffect, useContext } from "react";
 import { Flex, Center } from "@chakra-ui/react";
 import DetailInformation from "./DetailInformation";
+import { CharacterContext } from "../context/CharacterContext";
 
-export default function InformationCard({ page }) {
-  const [characters, setCharacters] = useState([]);
-
-  const [loading, setLoading] = useState(true);
+export default function InformationCard() {
+  const { page, characters, setCharacters, loading, setLoading } =
+    useContext(CharacterContext);
 
   useEffect(() => {
     ky.get(`https://rickandmortyapi.com/api/character?page=${page}`)
@@ -22,7 +22,7 @@ export default function InformationCard({ page }) {
   if (loading) {
     return <Center>Loading app...</Center>;
   }
-  console.log(characters.results);
+
   return (
     <Flex padding="16px" gap="8px" flexWrap="wrap">
       {characters.results.map((item) => (
