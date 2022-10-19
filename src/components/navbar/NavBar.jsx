@@ -1,10 +1,24 @@
-import { Box, Flex, Input } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Input,
+  useDisclosure,
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
+  Button,
+} from "@chakra-ui/react";
 import ky from "ky";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { CharacterContext } from "../context/CharacterContext";
 import { useDebouncedCallback } from "use-debounce";
 
 export default function NavBar() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = React.useRef();
   const { page, setPage, setLoading, setCharacters } =
     useContext(CharacterContext);
   function NextPage() {
@@ -20,8 +34,11 @@ export default function NavBar() {
     ky.get(`https://rickandmortyapi.com/api/character/?name=${value}`)
       .json()
       .then((resp) => {
-        console.log(resp);
         setCharacters(resp);
+      })
+      .catch((error) => {
+        console.log(error.response.status);
+        onOpen();
       })
       .finally(() => {
         setLoading(false);
@@ -64,6 +81,29 @@ export default function NavBar() {
           placeContent="Search"
         />
       </Flex>
+      <AlertDialog
+        isOpen={isOpen}
+        leastDestructiveRef={cancelRef}
+        onClose={onClose}
+      >
+        <AlertDialogOverlay>
+          <AlertDialogContent>
+            <AlertDialogHeader fontSize="lg" fontWeight="bold">
+              Search Error
+            </AlertDialogHeader>
+
+            <AlertDialogBody>
+              No Character with that name was found!
+            </AlertDialogBody>
+
+            <AlertDialogFooter>
+              <Button ref={cancelRef} onClick={onClose}>
+                Ok
+              </Button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
+      </AlertDialog>
     </Flex>
   );
 }
